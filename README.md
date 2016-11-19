@@ -1,8 +1,7 @@
 # saibot
 Currently, only WolframParser.java works. Have fun! (Plz no hacks)
 ### Compile
-cd into Saibot Docs
-run
+cd into Saibot Docs and run
 ```
   javac -classpath '/absolute/path/to/Saibot/lib/*:.' WolframParser.java
   java -classpath '/absolute/path/to/Saibot/lib/*:.' WolframParser 'term'
