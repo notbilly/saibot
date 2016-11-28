@@ -1,6 +1,14 @@
 # saibot
-Currently, only WolframParser.java works. Have fun! (Plz no hacks)
-### Compile
+Everything Works. Have fun! (Plz no hacks)
+### Compile Saibot
+```
+  javac -classpath '/absolute/path/to/Saibot/lib/*:.' Saibot.java
+  java -classpath '/absolute/path/to/Saibot/lib/*:.' Saibot
+```
+---
+This class can be user-customized! Define your own transpositions, definitions, and random responses by setting the fields to your own data.
+
+### Compile WolframParser
 cd into Saibot Docs and run
 ```
   javac -classpath '/absolute/path/to/Saibot/lib/*:.' WolframParser.java
