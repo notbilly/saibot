@@ -6,28 +6,43 @@ import java.lang.Math;
 * @author Billy Zhong, Gaurav Phanse, Sai Kapuluru
 * @version 1.0
 */
-public class Saibot{
+public class Saibot
+{
+    //Requirement 2b and 4-i satisfied by line 14
     /**
     * Contains all random responses from response database
     */
-    private static final String[] randomResponses;
+    private static final String[] randomResponses = {"I do not understand.", "What?", "Repita por favor.", "Come again?", "Could you please say something that makes sense?", "Sorry, can you say that in a different way?", "That is an inappropriate question, sir/ma’am.", "No comprendo", "You might need to dumb that down for me.", "I don’t dig that bro."};
+
+    //Requirement 2a and 4-ii satisfied by line 19
     /**
     * A Map of all definition and responses from response database
     */
     private static final HashMap termResponses;
+
+    //Requirement 4-iii satisfied by lines 27-32 and 108-114
     /**
     * Contains all Transposition Targets
     */
-    private static final String[] transposeFrom;
+    private static final String[] transposeFrom = {'are','am','were','was','you','i','your','my','i\'ve','you\'ve','i\'m','you\'re','me','you'};
+
     /**
     * Contains all Transposition Transformations
     */
-    private static final String[] transposeTo;
+    private static final String[] transposeTo = {'am','are','was','were','i','you','my','your','you\'ve','i\'ve','you\'re','i\'m','you','me'};
 
     /**
     * Say hi to Sai!
     */
     public static void greet(){
+      termResponses.put("normal force", "Normal force is the force that acts perpendicular to the surface that an object is on.");
+      termResponses.put("work", "W = Change in Kinetic Energy = Force x distance");
+      termResponses.put("power", "Power is work per unit time");
+      termResponses.put("vector", "A Vector is a quantity that includes both magnitude and direction.");
+      termResponses.put("newton's first law", "Newton's First Law is the Law of Inertia. An object in motion (or at rest) will remain in motion at constant velocity (or at rest) unless acted upon by an unbalanced force.");
+      termResponses.put("newton's second law", "Newton's Second Law states that force is equal to mass times acceleration.");
+      termResponses.put("newton's third law", "Newton's Third Law states that for every action force, there is an equal and opposite reaction force.");
+      termResponses.put("torque", "Torque is a force's ability to cause an object to rotate, measured in m-N.");
       System.out.println("Hi, I'm Saibot. I'm a physics tutor. Ask me anything!");
     }
 
@@ -55,6 +70,7 @@ public class Saibot{
       }
     }
 
+    //Requirement 3 satisfied by lines 70-100
     /**
     * Determines whether or not the input phrase is a question
     * @param input Text to be analyzed
@@ -100,7 +116,7 @@ public class Saibot{
     private static String getTransposedResp(String input){
       String temp = input.toLowerCase();
       for(int i = 0; i < transposeFrom.length; i++){
-        temp = temp.replaceAll(transposeFrom[i].toLowerCase(),transposeTo[i].toLowerCase());
+        temp = temp.replaceAll(" " + transposeFrom[i].toLowerCase() + " ", " " + transposeTo[i].toLowerCase() + " ");
       }
       return temp.valueOf(0).toUpperCase() + temp.substring(1);
     }
@@ -123,6 +139,7 @@ public class Saibot{
       return termResponses.get(term).toString();
     }
 
+    //Requirement 4-iv satisfied by lines 139-141 and WolframParser.java
     /**
     * Retrieves a definition of unknown term from Wolfram Alpha
     * @param term Term to define
