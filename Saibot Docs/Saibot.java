@@ -18,23 +18,8 @@ public class Saibot
     /**
     * A Map of all definition and responses from response database
     */
-    private static final HashMap termResponses;
-
-    //Requirement 4-iii satisfied by lines 27-32 and 108-114
-    /**
-    * Contains all Transposition Targets
-    */
-    private static final String[] transposeFrom = {'are','am','were','was','you','i','your','my','i\'ve','you\'ve','i\'m','you\'re','me','you'};
-
-    /**
-    * Contains all Transposition Transformations
-    */
-    private static final String[] transposeTo = {'am','are','was','were','i','you','my','your','you\'ve','i\'ve','you\'re','i\'m','you','me'};
-
-    /**
-    * Say hi to Sai!
-    */
-    public static void greet(){
+    private static HashMap termResponses = new HashMap<String, String>();;
+    static {
       termResponses.put("normal force", "Normal force is the force that acts perpendicular to the surface that an object is on.");
       termResponses.put("work", "W = Change in Kinetic Energy = Force x distance");
       termResponses.put("power", "Power is work per unit time");
@@ -43,6 +28,23 @@ public class Saibot
       termResponses.put("newton's second law", "Newton's Second Law states that force is equal to mass times acceleration.");
       termResponses.put("newton's third law", "Newton's Third Law states that for every action force, there is an equal and opposite reaction force.");
       termResponses.put("torque", "Torque is a force's ability to cause an object to rotate, measured in m-N.");
+    }
+
+    //Requirement 4-iii satisfied by lines 27-32 and 108-114
+    /**
+    * Contains all Transposition Targets
+    */
+    private static final String[] transposeFrom = {"are","am","were","was","you","i","your","my","i've","you've","i'm","you're","you","me"};
+
+    /**
+    * Contains all Transposition Transformations
+    */
+    private static final String[] transposeTo = {"am","are","was","were","i","you","my","your","you've","i've","you're","i'm","me","you"};
+
+    /**
+    * Say hi to Sai!
+    */
+    public static void greet(){
       System.out.println("Hi, I'm Saibot. I'm a physics tutor. Ask me anything!");
     }
 
@@ -77,7 +79,7 @@ public class Saibot
     * @return boolean True if input is a question, False if not
     */
     private static boolean isQuestion(String input){
-      return input.replaceAll(" ", "").valueOf(input.replaceAll(" ","").length()-1).equals("?");
+      return input.replaceAll(" ", "").substring(input.replaceAll(" ","").length()-1).equals("?");
     }
 
     /**
@@ -105,7 +107,7 @@ public class Saibot
     * @return String term that needs to be defined
     */
     private static String parseTerm(String input){
-      return input.toLowerCase().replace("what","").replace("are","").replace("is","").replace("define","").trim();
+      return input.toLowerCase().replace("what","").replace("are","").replace("is","").replace("define","").replace("?","").trim();
     }
 
     /**
@@ -118,7 +120,7 @@ public class Saibot
       for(int i = 0; i < transposeFrom.length; i++){
         temp = temp.replaceAll(" " + transposeFrom[i].toLowerCase() + " ", " " + transposeTo[i].toLowerCase() + " ");
       }
-      return temp.valueOf(0).toUpperCase() + temp.substring(1);
+      return temp.substring(0,1).toUpperCase() + temp.substring(1);
     }
 
     /**
@@ -147,5 +149,17 @@ public class Saibot
     */
     private static String getWolframResp(String term){
       return WolframParser.getWolframResp(term);
+    }
+
+    public static void main(String [] args){
+      greet();
+      System.out.println("> Can I do physics?");
+      chat("Can I do physics?");                          //Transpose
+      System.out.println("> What is torque?");
+      chat("What is torque?");                            //Definition Response
+      System.out.println("> What is kinetic energy?");
+      chat("What is kinetic energy?");                    //Unique Response (Wolfram Alpha)
+      System.out.println("> blah blah blah");
+      chat("blah blah blah");                             //Random Response
     }
 }

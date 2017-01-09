@@ -13,7 +13,7 @@ import com.wolfram.alpha.WASubpod;
 */
 public class WolframParser{
   private static String appid = "2JHXWJ-WQ7PVWR6TW";
-  
+
   /**
   * Retrieves a definition or information about term from Wolfram Alpha
   * @param term Term to define
@@ -67,13 +67,6 @@ public class WolframParser{
   */
   private static String parseWolframXml(String xml, String term){
     String [] arr = xml.split("\n");
-    String res = "";
-    if(arr.length == 1){
-      return xml;
-    }
-    else if(arr.length > 1){
-      res += term.substring(0,1).toUpperCase() + term.substring(1) + " is" + arr[0].substring(arr[0].lastIndexOf("|")+1);
-    }
-    return res;
+    return term.substring(0,1).toUpperCase() + term.substring(1) + " is" + arr[0].substring(arr[0].lastIndexOf("|")+1);
   }
 }
